@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh">
-    trigonometry-website/images/
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>基本三角函數介紹</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- 外部 CSS 檔案 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header>
@@ -19,12 +19,12 @@
         </nav>
     </header>
 
-    <section id="introduction">
+    <section id="introduction" class="section">
         <h2>什麼是三角函數？</h2>
         <p>三角函數是數學中用來描述角度與邊長關係的函數，特別是在直角三角形中。常見的三角函數包括正弦 (sin)、餘弦 (cos) 和正切 (tan)。這些函數用來表示一個角的對應邊長比例。</p>
     </section>
 
-    <section id="sin">
+    <section id="sin" class="section">
         <h2>正弦 (sin)</h2>
         <p>在一個直角三角形中，正弦函數用來描述對應角的對邊與斜邊的比值。</p>
         <p><strong>公式：</strong> <em>sin(θ) = 對邊 / 斜邊</em></p>
@@ -32,7 +32,7 @@
         <img src="https://web.ntnu.edu.tw/~496401058/teach/sine.jpg" alt="正弦函數範例圖" />
     </section>
 
-    <section id="cos">
+    <section id="cos" class="section">
         <h2>餘弦 (cos)</h2>
         <p>餘弦函數用來描述對應角的鄰邊與斜邊的比值。</p>
         <p><strong>公式：</strong> <em>cos(θ) = 鄰邊 / 斜邊</em></p>
@@ -40,7 +40,7 @@
         <img src="https://web.ntnu.edu.tw/~496401058/teach/cosine.jpg" alt="餘弦函數範例圖" />
     </section>
 
-    <section id="tan">
+    <section id="tan" class="section">
         <h2>正切 (tan)</h2>
         <p>正切函數用來描述對應角的對邊與鄰邊的比值。</p>
         <p><strong>公式：</strong> <em>tan(θ) = 對邊 / 鄰邊</em></p>
@@ -51,5 +51,42 @@
     <footer>
         <p>&copy; 2024 基本三角函數介紹</p>
     </footer>
+
+    <script>
+        $(document).ready(function() {
+            // 點擊導航連結時平滑滾動到對應的區塊
+            $('nav a').click(function(event) {
+                event.preventDefault();
+                var target = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 50
+                }, 800);
+            });
+
+            // 當滾動時，高亮顯示目前所在區塊的導航連結
+            $(window).scroll(function() {
+                var scrollPos = $(document).scrollTop();
+                $('nav a').each(function() {
+                    var currLink = $(this);
+                    var refElement = $(currLink.attr("href"));
+                    if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+                        $('nav ul li a').removeClass("active");
+                        currLink.addClass("active");
+                    }
+                });
+            });
+
+            // 當滾動到視窗中時，使各區塊淡入顯示
+            $(window).scroll(function() {
+                $('.section').each(function() {
+                    var sectionPos = $(this).offset().top;
+                    var topOfWindow = $(window).scrollTop();
+                    if (sectionPos < topOfWindow + $(window).height() - 100) {
+                        $(this).addClass("fadeIn");
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
