@@ -1,3 +1,4 @@
+/* 基本樣式 */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.8;
@@ -46,6 +47,13 @@ nav ul li a {
     transition: background-color 0.3s ease;
 }
 
+/* 當前連結樣式 */
+nav ul li a.active {
+    background-color: #45a049;
+    border-radius: 25px;
+}
+
+/* 滑過連結樣式 */
 nav ul li a:hover {
     background-color: #45a049;
     border-radius: 25px;
@@ -62,6 +70,7 @@ section {
     transition: transform 0.2s ease;
 }
 
+/* 滾動時區塊向上移動效果 */
 section:hover {
     transform: translateY(-5px); 
 }
@@ -135,4 +144,14 @@ footer p {
     header h1 {
         font-size: 2em;
     }
+}
+
+/* 淡入效果 */
+.section {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.section.fadeIn {
+    opacity: 1;
 }
